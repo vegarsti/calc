@@ -136,6 +136,23 @@ func TestExpressionValue(t *testing.T) {
 			),
 			expectedValue: 1,
 		},
+		{
+			desc: "(2+2)*(2+2)",
+			expression: calc.NewBinaryExpression(
+				calc.NewBinaryExpression(
+					calc.NewAtom(2),
+					calc.NewAtom(2),
+					calc.Plus,
+				),
+				calc.NewBinaryExpression(
+					calc.NewAtom(2),
+					calc.NewAtom(2),
+					calc.Plus,
+				),
+				calc.Multiply,
+			),
+			expectedValue: 16,
+		},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.desc, func(t *testing.T) {
