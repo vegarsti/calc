@@ -40,6 +40,15 @@ func TestExpressionValue(t *testing.T) {
 			),
 			expectedValue: 0,
 		},
+		{
+			desc: "2*2",
+			expression: calc.NewBinaryExpression(
+				calc.NewAtom(2),
+				calc.NewAtom(2),
+				calc.Times,
+			),
+			expectedValue: 4,
+		},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.desc, func(t *testing.T) {
