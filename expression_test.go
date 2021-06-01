@@ -85,6 +85,40 @@ func TestExpressionValue(t *testing.T) {
 			),
 			expectedValue: 8,
 		},
+		{
+			desc: "(1+1)+(1+1)",
+			expression: calc.NewBinaryExpression(
+				calc.NewBinaryExpression(
+					calc.NewAtom(1),
+					calc.NewAtom(1),
+					calc.Plus,
+				),
+				calc.NewBinaryExpression(
+					calc.NewAtom(1),
+					calc.NewAtom(1),
+					calc.Plus,
+				),
+				calc.Plus,
+			),
+			expectedValue: 4,
+		},
+		{
+			desc: "(1+1)+(1+1)",
+			expression: calc.NewBinaryExpression(
+				calc.NewBinaryExpression(
+					calc.NewAtom(1),
+					calc.NewAtom(1),
+					calc.Plus,
+				),
+				calc.NewBinaryExpression(
+					calc.NewAtom(1),
+					calc.NewAtom(1),
+					calc.Plus,
+				),
+				calc.Minus,
+			),
+			expectedValue: 0,
+		},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.desc, func(t *testing.T) {
