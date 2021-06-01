@@ -45,7 +45,7 @@ func TestExpressionValue(t *testing.T) {
 			expression: calc.NewBinaryExpression(
 				calc.NewAtom(2),
 				calc.NewAtom(2),
-				calc.Times,
+				calc.Multiply,
 			),
 			expectedValue: 4,
 		},
@@ -118,6 +118,23 @@ func TestExpressionValue(t *testing.T) {
 				calc.Minus,
 			),
 			expectedValue: 0,
+		},
+		{
+			desc: "(1+1)/(1+1)",
+			expression: calc.NewBinaryExpression(
+				calc.NewBinaryExpression(
+					calc.NewAtom(1),
+					calc.NewAtom(1),
+					calc.Plus,
+				),
+				calc.NewBinaryExpression(
+					calc.NewAtom(1),
+					calc.NewAtom(1),
+					calc.Plus,
+				),
+				calc.Divide,
+			),
+			expectedValue: 1,
 		},
 	}
 	for _, tc := range tcs {
