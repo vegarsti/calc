@@ -4,3 +4,4 @@ package calc
 type Kind = string
 
 var AtomKind = Kind("atom")
+var BinaryKind = Kind("binary")

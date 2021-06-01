@@ -22,6 +22,24 @@ func TestExpressionValue(t *testing.T) {
 			expression:    calc.NewAtom(-1),
 			expectedValue: -1,
 		},
+		{
+			desc: "1+1",
+			expression: calc.NewBinaryExpression(
+				calc.NewAtom(1),
+				calc.NewAtom(1),
+				calc.Plus,
+			),
+			expectedValue: 2,
+		},
+		{
+			desc: "1-1",
+			expression: calc.NewBinaryExpression(
+				calc.NewAtom(1),
+				calc.NewAtom(1),
+				calc.Minus,
+			),
+			expectedValue: 0,
+		},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.desc, func(t *testing.T) {
