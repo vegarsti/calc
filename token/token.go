@@ -19,4 +19,8 @@ const (
 	MINUS    = "-"
 	MULTIPLY = "*"
 	DIVIDE   = "/"
+
+	// Delimiters
+	LPAREN = "("
+	RPAREN = ")"
 )
