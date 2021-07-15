@@ -1,5 +1,8 @@
-on: [push, pull_request]
 name: test
+on:
+  pull_request:
+    branches:
+      - 'main'
 jobs:
   test:
     runs-on: ubuntu-latest
