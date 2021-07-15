@@ -17,8 +17,8 @@ const (
 	// Operators
 	PLUS     = "+"
 	MINUS    = "-"
-	MULTIPLY = "*"
-	DIVIDE   = "/"
+	ASTERISK = "*"
+	SLASH    = "/"
 
 	// Delimiters
 	LPAREN = "("
