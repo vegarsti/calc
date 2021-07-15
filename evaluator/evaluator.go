@@ -83,8 +83,9 @@ func evalIntegerInfixExpression(operator string, left object.Object, right objec
 		return &object.Integer{Value: leftVal * rightVal}
 	case "/":
 		return &object.Integer{Value: leftVal / rightVal}
+	default:
+		panic("unreachable; should have been caught by check in outer function")
 	}
-	return nil
 }
 
 func newError(format string, a ...interface{}) *object.Error {
