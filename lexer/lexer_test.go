@@ -8,7 +8,7 @@ import (
 )
 
 func TestExpressionValue(t *testing.T) {
-	input := "1 + 2 * (30 / 5) - 1"
+	input := "1 + 2 * (30 / 5) - 1 + 3.14 + 1.0"
 	tests := []struct {
 		expectedType    token.TokenType
 		expectedLiteral string
@@ -24,6 +24,10 @@ func TestExpressionValue(t *testing.T) {
 		{token.RPAREN, ")"},
 		{token.MINUS, "-"},
 		{token.INT, "1"},
+		{token.PLUS, "+"},
+		{token.FLOAT, "3.14"},
+		{token.PLUS, "+"},
+		{token.FLOAT, "1.0"},
 	}
 	l := lexer.New(input)
 	for i, tt := range tests {

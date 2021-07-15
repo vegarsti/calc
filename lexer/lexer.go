@@ -50,8 +50,7 @@ func (l *Lexer) NextToken() token.Token {
 		tok.Type = token.EOF
 	default:
 		if isDigit(l.ch) {
-			tok.Type = token.INT
-			tok.Literal = l.readNumber()
+			tok := l.readNumber()
 			return tok
 		}
 		tok = newToken(token.ILLEGAL, l.ch)
@@ -65,16 +64,36 @@ func newToken(tokenType token.TokenType, ch byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(ch)}
 }
 
-func (l *Lexer) readNumber() string {
+func (l *Lexer) readNumber() token.Token {
 	position := l.position
 	for isDigit(l.ch) {
 		l.readChar()
 	}
-	return l.input[position:l.position]
+
+	// float
+	if isDot(l.ch) {
+		l.readChar()
+		for isDigit(l.ch) {
+			l.readChar()
+		}
+		return token.Token{
+			Type:    token.FLOAT,
+			Literal: l.input[position:l.position],
+		}
+	}
+
+	return token.Token{
+		Type:    token.INT,
+		Literal: l.input[position:l.position],
+	}
 }
 
 func isDigit(ch byte) bool {
 	return '0' <= ch && ch <= '9'
+}
+
+func isDot(ch byte) bool {
+	return '.' == ch
 }
 
 func (l *Lexer) skipWhitespace() {
