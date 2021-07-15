@@ -15,3 +15,5 @@ Hello vegarsti! This is a calculator!
 >> 2 / 2
 1
 ```
+
+Based on and heavily copied from Thorsten Ball's excellent [Writing an Interpreter in Go](https://interpreterbook.com/).
