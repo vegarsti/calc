@@ -69,9 +69,21 @@ func evalMinusPrefixOperatorExpression(right object.Object) object.Object {
 
 func evalInfixExpression(operator string, left object.Object, right object.Object) object.Object {
 	switch {
+	// int, int
 	case left.Type() == object.INTEGER_OBJ && right.Type() == object.INTEGER_OBJ:
 		return evalIntegerInfixExpression(operator, left, right)
+	// float, float
 	case left.Type() == object.FLOAT_OBJ && right.Type() == object.FLOAT_OBJ:
+		return evalFloatInfixExpression(operator, left, right)
+	// float, int
+	case left.Type() == object.FLOAT_OBJ && right.Type() == object.INTEGER_OBJ:
+		rightInteger := right.(*object.Integer)
+		right = &object.Float{Value: float64(rightInteger.Value)}
+		return evalFloatInfixExpression(operator, left, right)
+	// int, float
+	case left.Type() == object.INTEGER_OBJ && right.Type() == object.FLOAT_OBJ:
+		leftInteger := left.(*object.Integer)
+		left = &object.Float{Value: float64(leftInteger.Value)}
 		return evalFloatInfixExpression(operator, left, right)
 	default:
 		return newError("unknown operator: %s %s %s", left.Type(), operator, right.Type())
